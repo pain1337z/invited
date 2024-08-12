@@ -211,11 +211,11 @@ class KeepAlive:
         # print("KeepAlive")
         stream.write_short(self.ID)
 
-##class ClaimVIPModule:
-    ##def __init__(self,loot_id):
- ##       self.loot_id = loot_id
+class ClaimVIPModule:
+    def __init__(self,loot_id):
+        self.loot_id = loot_id
 
-  ##  ID = 15275
+    ID = 15275
 
     def write(self, stream):
         stream.write_utf(self.loot_id)
@@ -618,8 +618,8 @@ class Gameclient:
     def random_movement(self):
         while self.running:
             # eic
-            # x = randint(17800, 18000)
-            # y = 1200
+            #x = randint(17800, 18000)
+            #y = 1200
             # vru
             # x = randint(19500, 19200)
             # y = 12800
@@ -714,20 +714,20 @@ class Gameclient:
                 print(
                     f"[*] Other player pos {other_player_pos.user_id} {other_player_pos.x} {other_player_pos.y}")
             else:
-                print("[*] Unknown packet [{}]: {}".format(packet_id, bs.data.hex()))
+                #print("[*] Unknown packet [{}]: {}".format(packet_id, bs.data.hex()))
                 pass
 
 
 global name
 global id
 global time_pause
-user_data = {"TITANIK[CEO]CHARLET": 167100448}
+user_data = {"wtv": 167100448}
 time_pause = 0.2
 
-dosids = ["2c273b82fb5460517979e60289346595"]
+dosids = [""]
 
 def run_client(dosid):
-    client = Gameclient(dosid, 'tr6')
+    client = Gameclient(dosid, 'int1')
     client.login()
     client.run()
 run_client(dosids[0])
