@@ -663,7 +663,7 @@ class Gameclient:
                           KeepAlive()], seconds=5, id='keep_alive')
         scheduler.add_job(self.send_packet, 'interval', args=[
                           LeaveGroup()], seconds=2, id='leave_group')
-        scheduler.start()
+        
         while self.running:
 
             # read packet length
@@ -697,7 +697,8 @@ class Gameclient:
                 init_thing = "3D 1918x1041 .root1.instance470.MainClientApplication0.ApplicationSkin2.Group3.Group4._-Q53_5.instance25058 root1 false -1"
                 self.send_packet(InitPacket(init_thing, 1))
                 self.send_packet(InitPacket(init_thing, 2))
-                self.send_packet(KeepAlive())
+                self.send_packet(KeepAlive())   
+                scheduler.start()
             elif packet_id == GateInit.ID:
                 gate_packet = GateInit()
                 gate_packet.read(bs)
