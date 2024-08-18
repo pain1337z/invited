@@ -621,11 +621,11 @@ class Gameclient:
             #x = randint(17800, 18000)
             #y = 1200
             # vru
-            # x = randint(19500, 19200)
-            # y = 12800
+            x = randint(19500, 19200)
+            y = 12800
             # mmo
-            x = randint(17800, 18000)
-            y = 1200
+            #x = randint(17800, 18000)
+            #y = 1200
             self.send_packet(Movement(x, self.last_x, y, self.last_y))
             self.last_x = x
             self.last_y = y
@@ -721,13 +721,13 @@ class Gameclient:
 global name
 global id
 global time_pause
-user_data = {"wtv": 167100448}
-time_pause = 0.2
+user_data = {"NotㅤJessiㅤツ": 96691059}
+time_pause = 0.000001
 
-dosids = [""]
+dosids = ["13cee505f541f443bcaf29339188dfdb"]
 
 def run_client(dosid):
-    client = Gameclient(dosid, 'int1')
+    client = Gameclient(dosid, 'tr5')
     client.login()
     client.run()
 run_client(dosids[0])
