@@ -21,7 +21,7 @@ u16 = uint16
 u32 = uint32
 u64 = uint64
 urllib3.disable_warnings()
-VERSION_HASH = "2288b5adc1b3377c217c9e212e024300"
+VERSION_HASH = "071849030a9aae5816390dd80a3dafbd"
 
 
 def busy_wait(duration):
@@ -224,7 +224,7 @@ class Invite:
     def __init__(self, name):
         self.name = name
 
-    ID = -11173
+    ID = 3333
 
     def write(self, stream):
         stream.write_short(self.ID)
@@ -237,7 +237,7 @@ class CancelInvite:
     def __init__(self, uid):
         self.uid = uid
 
-    ID = -24695
+    ID = 6022
 
     def write(self, stream):
         stream.write_short(self.ID)
@@ -249,7 +249,7 @@ class LeaveGroup:
     def __init__(self):
         pass
 
-    ID = 9875
+    ID = -13998
 
     def write(self, stream):
         stream.write_short(self.ID)
@@ -722,13 +722,13 @@ class Gameclient:
 global name
 global id
 global time_pause
-user_data = {"NotㅤJessiㅤツ": 96691059}
-time_pause = 0.000001
+user_data = {"suskun1": 48633655}
+time_pause = 0.01
 
-dosids = ["13cee505f541f443bcaf29339188dfdb"]
+dosids = ["9e13c3ddab6501e263f3beb0fb40828c"]
 
 def run_client(dosid):
-    client = Gameclient(dosid, 'tr5')
+    client = Gameclient(dosid, 'tr3')
     client.login()
     client.run()
 run_client(dosids[0])
