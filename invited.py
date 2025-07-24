@@ -21,7 +21,7 @@ u16 = uint16
 u32 = uint32
 u64 = uint64
 urllib3.disable_warnings()
-VERSION_HASH = "071849030a9aae5816390dd80a3dafbd"
+VERSION_HASH = "2288b5adc1b3377c217c9e212e024300"
 
 
 def busy_wait(duration):
@@ -208,8 +208,9 @@ class KeepAlive:
     ID = 2
 
     def write(self, stream):
-        # print("KeepAlive")
+        print("KeepAlive")
         stream.write_short(self.ID)
+        stream.write_byte(0)
 
 class ClaimVIPModule:
     def __init__(self,loot_id):
@@ -224,7 +225,7 @@ class Invite:
     def __init__(self, name):
         self.name = name
 
-    ID = 3333
+    ID = 21517
 
     def write(self, stream):
         stream.write_short(self.ID)
@@ -237,7 +238,7 @@ class CancelInvite:
     def __init__(self, uid):
         self.uid = uid
 
-    ID = 6022
+    ID = 31120
 
     def write(self, stream):
         stream.write_short(self.ID)
@@ -340,20 +341,20 @@ class Jump:
 
 
 class Movement:
-    def __init__(self, _p27, _k4F, _S2S, _v4W):
-        self._p27 = _p27  # new x
-        self._k4F = _k4F  # current x
-        self._S2S = _S2S  # new y
-        self._v4W = _v4W  # current y
+    def __init__(self, current_x, current_y, new_x, new_y):
+        self.current_x = current_x
+        self.current_y = current_y
+        self.new_x = new_x
+        self.new_y = new_y  # new y
 
     ID = 82
 
     def write(self, stream):
         stream.write_short(self.ID)
-        stream.write_int(self._k4F << 11 | self._k4F >> 21)
-        stream.write_int(self._v4W >> 15 | self._v4W << 17)
-        stream.write_int(self._p27 << 13 | self._p27 >> 19)
-        stream.write_int(self._S2S << 10 | self._S2S >> 22)
+        stream.write_int(self.current_x << 11 | self.current_x >> 21)
+        stream.write_int(self.new_y >> 15 | self.new_y << 17)
+        stream.write_int(self.new_x << 13 | self.new_x >> 19)
+        stream.write_int(self.new_y << 10 | self.new_y >> 22)
 
 # Create and send the custom packet
 
@@ -621,24 +622,24 @@ class Gameclient:
             #x = randint(17800, 18000)
             #y = 1200
             # vru
-            x = randint(19500, 19200)
-            y = 12800
+            #x = randint(19500, 19200)
+            #y = 12800
             # mmo
-            #x = randint(17800, 18000)
-            #y = 1200
-            self.send_packet(Movement(x, self.last_x, y, self.last_y))
+            x = randint(17800, 18000)
+            y = 1200
+            self.send_packet(Movement(self.last_x, self.last_y, x, y))
             self.last_x = x
             self.last_y = y
-            sleep(1)
+            sleep(randint(5, 10))
     
     def invite_and_cancel(self):
         while self.running:
             if len(user_data) > 0:
-                for username, id in user_data.items():
+                for username, user_id in user_data.items():
                     self.send_packet(Invite(username))
                     print(f"[*] Invited {username}")
                     busy_wait(time_pause)
-                    self.send_packet(CancelInvite(id))
+                    self.send_packet(CancelInvite(user_id))
                     print(f"[*] Canceled invite {username}")
             else:
                 busy_wait(1)
@@ -657,12 +658,12 @@ class Gameclient:
 
         self.running = True
         scheduler = BackgroundScheduler()
-        scheduler.add_job(self.invite_and_cancel, id='invite_and_cancel')
-        scheduler.add_job(self.random_movement, id='movement')
+        scheduler.add_job(self.invite_and_cancel, id='invite_and_cancel',misfire_grace_time=5)
+        scheduler.add_job(self.random_movement, id='movement',misfire_grace_time=5)
         scheduler.add_job(self.send_packet, 'interval', args=[
-                          KeepAlive()], seconds=5, id='keep_alive')
+                          KeepAlive()], seconds=5, id='keep_alive',misfire_grace_time=5)
         scheduler.add_job(self.send_packet, 'interval', args=[
-                          LeaveGroup()], seconds=2, id='leave_group')
+                          LeaveGroup()], seconds=2, id='leave_group',misfire_grace_time=5)
         
         while self.running:
 
@@ -697,7 +698,7 @@ class Gameclient:
                 init_thing = "3D 1918x1041 .root1.instance470.MainClientApplication0.ApplicationSkin2.Group3.Group4._-Q53_5.instance25058 root1 false -1"
                 self.send_packet(InitPacket(init_thing, 1))
                 self.send_packet(InitPacket(init_thing, 2))
-                self.send_packet(KeepAlive())   
+                #self.send_packet(KeepAlive())   
                 scheduler.start()
             elif packet_id == GateInit.ID:
                 gate_packet = GateInit()
@@ -722,13 +723,13 @@ class Gameclient:
 global name
 global id
 global time_pause
-user_data = {"suskun1": 48633655}
-time_pause = 0.01
+user_data = {"----------------":172767821}
+time_pause = 0.001
 
-dosids = ["9e13c3ddab6501e263f3beb0fb40828c"]
+dosids = ["3fbc318e823c623cfa650f787b1bc81d"]
 
 def run_client(dosid):
-    client = Gameclient(dosid, 'tr3')
+    client = Gameclient(dosid, 'int1')
     client.login()
     client.run()
 run_client(dosids[0])
