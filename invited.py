@@ -221,6 +221,21 @@ class ClaimVIPModule:
     def write(self, stream):
         stream.write_utf(self.loot_id)
 
+class Contact_List_Handler:
+    def __init__(self,Username,ContactRTYPE,user_id):
+        self.Username = Username
+        self.ContactRTYPE = ContactRTYPE
+        self.user_id = user_id
+        
+    
+    ID = -29620
+    
+    def write(self, stream):
+        encoded_name = self.Username.encode('utf-8')
+        stream.write_short(len(encoded_name))
+        stream.write_bytes(encoded_name)
+
+
 class Invite:
     def __init__(self, name):
         self.name = name
@@ -328,6 +343,9 @@ class OtherPlayerInfo:
         self.p1i = stream.read_byte()  # Assuming this reads an object from the stream
 
 
+
+
+        
 class Jump:
     def __init__(self, mapId, gate_id):
         self.mapId = mapId  # new x
@@ -637,10 +655,10 @@ class Gameclient:
             if len(user_data) > 0:
                 for username, user_id in user_data.items():
                     self.send_packet(Invite(username))
-                    print(f"[*] Invited {username}")
+                    #print(f"[*] Invited {username}")
                     busy_wait(time_pause)
                     self.send_packet(CancelInvite(user_id))
-                    print(f"[*] Canceled invite {username}")
+                    #print(f"[*] Canceled invite {username}")
             else:
                 busy_wait(1)
 
@@ -713,8 +731,8 @@ class Gameclient:
             elif packet_id == 90:
                 other_player_pos = OtherPlayerPosInfo()
                 other_player_pos.read(bs)
-                print(
-                    f"[*] Other player pos {other_player_pos.user_id} {other_player_pos.x} {other_player_pos.y}")
+                #print(
+                #    f"[*] Other player pos {other_player_pos.user_id} {other_player_pos.x} {other_player_pos.y}")
             else:
                 #print("[*] Unknown packet [{}]: {}".format(packet_id, bs.data.hex()))
                 pass
@@ -723,10 +741,10 @@ class Gameclient:
 global name
 global id
 global time_pause
-user_data = {"Skydance///25":172303915}
+user_data = {"iksdeiksdeiksdeiksde":170535388}
 time_pause = 0.001
 
-dosids = ["3fbc318e823c623cfa650f787b1bc81d"]
+dosids = ["15c4c8b0c846fe4dcc55cc179e2ff328"]
 
 def run_client(dosid):
     client = Gameclient(dosid, 'int1')

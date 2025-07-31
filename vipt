@@ -233,63 +233,6 @@ class ClaimVIPModule:
         stream.write_utf(self.loot_id)
 
 
-def resources_count(resource, number):
-    return [resource.strip() for i in range(number)]
-
-
-# VIP items configuration
-vip_modules = [
-    'equipment_shipupgrade_dmg-xt10',
-    'equipment_shipupgrade_hp-xt10', 
-    'equipment_shipupgrade_shd-xt10', 
-    'equipment_shipupgrade_spc-xt10'
-]
-vip_modules = [module.strip() for module in vip_modules]
-
-stuff_to_claim = []
-stuff_to_claim.extend(vip_modules)
-# Uncomment the line below to add ammunition
-# stuff_to_claim.extend(resources_count('equipment_weapon_laser_os-l', 10)) #ody
-
-
-claimable_items = [
-    "drone_designs_drone-champion-eostrana",
-    "equipment_shipupgrade_spc-xt10",
-    "equipment_weapon_laser_am-l",
-    "equipment_weapon_laser_pr-l",
-    "equipment_generator_shield_fs-04",
-    "equipment_shipupgrade_hp-xt10",
-    "equipment_shipupgrade_dmg-xt10",
-    "equipment_shipupgrade_shd-xt10",
-    "drone_designs_drone-eostra",
-    "drone_designs_archeron",
-    "drone_designs_artemis",
-    "resource_collectable_indoctrine-accelerator",
-    "resource_collectable_indoctrineoil",
-    "resource_collectable_axion-beam-regulator",
-    "resource_collectable_permit-plus",
-    "resource_collectable_permit",
-    "resource_collectable_bifenon",
-    "resource_collectable_kyhalon",
-    "resource_collectable_polychromium",
-    "resource_extra-energy",
-    "resource_booty-key",
-    "resource_pet-fuel",
-    "resource_collectable_schism",
-    "resource_collectable_quickcoupon",
-    "resource_collectable_evocation-chip",
-    "resource_collectable_prismatium",
-    "resource_collectable_rinusk",
-    "resource_collectable_tetrathrin",
-    "resource_collectable_scrapium",
-    "resource_collectable_ggeu",
-    "ammunition_laser_sab-50",
-    "ammunition_laser_mcb-50",
-    "ammunition_laser_ucb-100",
-    "ammunition_laser_rsb-75",
-    "ammunition_specialammo_r-ic3"
-]
-
 
 class LeaveGroup:
     def __init__(self):
@@ -787,6 +730,69 @@ class Gameclient:
         # Clean up scheduler when done
         if self.scheduler:
             self.scheduler.shutdown()
+
+
+
+
+def resources_count(resource, number):
+    return [resource.strip() for i in range(number)]
+
+
+# VIP items configuration
+vip_modules = [
+    'equipment_shipupgrade_dmg-xt10',
+    'equipment_shipupgrade_hp-xt10', 
+    'equipment_shipupgrade_shd-xt10', 
+    'equipment_shipupgrade_spc-xt10'
+]
+vip_modules = [module.strip() for module in vip_modules]
+
+stuff_to_claim = []
+stuff_to_claim.extend(vip_modules)
+# Uncomment the line below to add ammunition
+# stuff_to_claim.extend(resources_count('equipment_weapon_laser_os-l', 10)) #ody
+
+
+claimable_items = [
+    "drone_designs_drone-champion-eostrana",
+    "equipment_shipupgrade_spc-xt10",
+    "equipment_weapon_laser_am-l",
+    "equipment_weapon_laser_pr-l",
+    "equipment_generator_shield_fs-04",
+    "equipment_shipupgrade_hp-xt10",
+    "equipment_shipupgrade_dmg-xt10",
+    "equipment_shipupgrade_shd-xt10",
+    "drone_designs_drone-eostra",
+    "drone_designs_archeron",
+    "drone_designs_artemis",
+    "resource_collectable_indoctrine-accelerator",
+    "resource_collectable_indoctrineoil",
+    "resource_collectable_axion-beam-regulator",
+    "resource_collectable_permit-plus",
+    "resource_collectable_permit",
+    "resource_collectable_bifenon",
+    "resource_collectable_kyhalon",
+    "resource_collectable_polychromium",
+    "resource_extra-energy",
+    "resource_booty-key",
+    "resource_pet-fuel",
+    "resource_collectable_schism",
+    "resource_collectable_quickcoupon",
+    "resource_collectable_evocation-chip",
+    "resource_collectable_prismatium",
+    "resource_collectable_rinusk",
+    "resource_collectable_tetrathrin",
+    "resource_collectable_scrapium",
+    "resource_collectable_ggeu",
+    "ammunition_laser_sab-50",
+    "ammunition_laser_mcb-50",
+    "ammunition_laser_ucb-100",
+    "ammunition_laser_rsb-75",
+    "ammunition_specialammo_r-ic3"
+]
+
+
+
 
 
 # Configuration
