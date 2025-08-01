@@ -226,7 +226,7 @@ class ClaimVIPModule:
     def __init__(self, loot_id):
         self.loot_id = loot_id
 
-    ID = 16035
+    ID = -17354
 
     def write(self, stream):
         stream.write_short(self.ID)
@@ -626,7 +626,7 @@ class Gameclient:
                     self.send_packet(ClaimVIPModule(loot_id))
                     print(f"[*] Sent claim request for: {loot_id}")
                     claimed_count += 1
-                    time.sleep(0.5)  # Çok kısa delay, hızlı claiming
+                    time.sleep(1)  # Çok kısa delay, hızlı claiming
                 except Exception as e:
                     print(f"[!] Error claiming {loot_id}: {e}")
             
@@ -674,6 +674,7 @@ class Gameclient:
                 login_req = LoginRequest(
                     self.flashvars["userID"], 0, self.flashvars["sessionID"], "", self.flashvars["pid"])
                 self.send_packet(login_req)
+                print("slr")
             elif packet_id == HeroInit.ID:
                 heroinit = HeroInit()
                 heroinit.read(bs)
@@ -697,8 +698,8 @@ class Gameclient:
                 self.scheduler.add_job(self.random_movement, id='movement', misfire_grace_time=5)
                 self.scheduler.add_job(self.send_packet, 'interval', args=[
                               KeepAlive()], seconds=15, id='keep_alive', misfire_grace_time=5)
-                self.scheduler.add_job(self.send_packet, 'interval', args=[
-                             LeaveGroup()], seconds=10, id='leave_group', misfire_grace_time=5)
+                #self.scheduler.add_job(self.send_packet, 'interval', args=[
+                #             LeaveGroup()], seconds=10, id='leave_group', misfire_grace_time=5)
                 self.scheduler.start()
                 
             elif packet_id == GateInit.ID:
@@ -796,10 +797,10 @@ claimable_items = [
 
 
 # Configuration
-dosids = ["1ffa7caf7d2966917f0086d9ed15ca32"]
+dosids = ["xxxx"]
 
 def run_client(dosid):
-    client = Gameclient(dosid, 'tr3')
+    client = Gameclient(dosid, 'xxx')
     client.login()
     client.run()
 
